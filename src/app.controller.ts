@@ -14,7 +14,7 @@ export class AppController {
     };
   }
 
-  @Post('/api/generate-key-pair')
+  @Post('generate-key-pair')
   async generateKeyPair(@Req() { user }: { user: UserDto }) {
     return user;
   }
