@@ -49,7 +49,7 @@ POST http://localhost:3000/api/get-all
 {}
 
 ###============================= GENERATE KEY PAIR ENDPOINTS =============================
-:token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJpYXQiOjE2MjUzNDQ3MjcsImV4cCI6MTYyNTM0NTAyN30.1W5Wqy89iDHkJe1mdSiC1JoCAxuWoiPRUd7M2bEdxJ0
+:token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNjI1MzQ3MzczLCJleHAiOjE2MjUzNDc2NzN9.LG1ohCYxYmkE792bCe3_dDGbhRTP3PI01ONMFY_P_E
 ###Example of generate key pair request
 
 POST http://localhost:3000/api/generate-key-pair
