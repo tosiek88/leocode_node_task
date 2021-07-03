@@ -1,4 +1,4 @@
-###
+###============================= SIGN IN ENDPOINTS =============================
 POST http://localhost:3000/api/sign-in
 Content-Type: application/json
 
@@ -32,3 +32,13 @@ Content-Type: application/json
  "email":"a@b.com",
  "password":"1234"
 }
+
+###============================= GENERATE KEY PAIR ENDPOINTS =============================
+:token=
+###Example of generate key pair request
+
+POST http://localhost:3000/api/generate-key-pair
+Authorization: Bearer :token
+
+
+###============================= ENCRYPT ENDPOINTS =============================
