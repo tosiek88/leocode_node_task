@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { UserRole } from 'src/entity/constans';
 
 export class UserDto {
   @AutoMap()
@@ -11,5 +12,8 @@ export class UserDto {
   password = '';
 
   @AutoMap()
-  role = '';
+  role: UserRole;
+
+  @AutoMap()
+  token = '';
 }
