@@ -24,17 +24,32 @@ Content-Type: application/json
  "password":"1234"
 }
 
-###Example postive validated values
+###Example postive logine as ADMIN
 POST http://localhost:3000/api/sign-in
 Content-Type: application/json
 
 {
- "email":"a@b.com",
- "password":"1234"
+ "email":"admin@mail.com",
+ "password":"$2b$10$NVZuUn6qxpPtmHkLDHxQzetkKgT4Oopi87KOQJcZFFrOm0LdYtWae"
 }
 
+###Example postive logine as USER
+POST http://localhost:3000/api/sign-in
+Content-Type: application/json
+
+{
+ "email":"user@mail.com",
+ "password":"$2b$10$bZojqhcDXWZIcfmRD6d9S.mG3hr5oxpM25BTXg35fXJX422NBhnn."
+}
+
+
+###Example postive logine as USER
+POST http://localhost:3000/api/get-all
+
+{}
+
 ###============================= GENERATE KEY PAIR ENDPOINTS =============================
-:token=
+:token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJpYXQiOjE2MjUzNDQ3MjcsImV4cCI6MTYyNTM0NTAyN30.1W5Wqy89iDHkJe1mdSiC1JoCAxuWoiPRUd7M2bEdxJ0
 ###Example of generate key pair request
 
 POST http://localhost:3000/api/generate-key-pair

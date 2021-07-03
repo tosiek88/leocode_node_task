@@ -1,12 +1,5 @@
-export enum UserRole {
-  GUEST = -1,
-  ADMIN,
-  USER,
-}
+export const GUEST = 'GUEST';
+export const ADMIN = 'ADMIN';
+export const USER = 'USER';
 
-export const NullUser = {
-  id: -1,
-  email: '',
-  password: '',
-  role: UserRole.GUEST,
-};
+export type UserRole = typeof ADMIN | typeof USER | typeof GUEST;

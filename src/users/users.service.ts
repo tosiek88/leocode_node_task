@@ -14,6 +14,15 @@ export class UsersService {
 
   async findByEmail(email: string): Promise<UserDto> {
     const user = await this.userRepository.findOneByEmail(email);
-    return this.mapper.map(user, UserDto, User);
+    const mappedUser = this.mapper.map(user, UserDto, User);
+    return mappedUser;
+  }
+
+  async setTokenForUser(email: string, token: string) {
+    return await this.userRepository.setTokenForUser(email, token);
+  }
+
+  async getAll() {
+    return await this.userRepository.getAll();
   }
 }
