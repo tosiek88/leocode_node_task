@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RepositoryInMemoryService } from './repository-in-memory.service';
+import { InMemoryUserRepository } from './in-memory.repository';
 
 describe('RepositoryInMemoryService', () => {
-  let service: RepositoryInMemoryService;
+  let service: InMemoryUserRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [RepositoryInMemoryService],
+      providers: [InMemoryUserRepository],
     }).compile();
 
-    service = module.get<RepositoryInMemoryService>(RepositoryInMemoryService);
+    service = module.get<InMemoryUserRepository>(InMemoryUserRepository);
   });
 
   it('should be defined', () => {

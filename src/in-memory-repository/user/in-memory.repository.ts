@@ -3,7 +3,7 @@ import { UserRole } from 'src/entity/constans';
 import { User } from 'src/entity/user';
 
 @Injectable()
-export class InMemoryRepository {
+export class InMemoryUserRepository {
   private readonly users = [
     {
       id: 1,
@@ -19,7 +19,7 @@ export class InMemoryRepository {
     },
   ];
 
-  async findOne(email: string): Promise<User | undefined> {
+  async findOneByEmail(email: string): Promise<User | undefined> {
     return this.users.find((user) => user.email === email);
   }
 }
