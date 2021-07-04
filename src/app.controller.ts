@@ -30,7 +30,7 @@ export class AppController {
   @UseGuards(AuthGuard('jwt'))
   @Post('generate-key-pair')
   async generateKeyPair(@Req() { user }: { user: UserDto }) {
-    return user;
+    return this.userService.generateKeyPairForUser(1);
   }
 
   @Roles(ADMIN)

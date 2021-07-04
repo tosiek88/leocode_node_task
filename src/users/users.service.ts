@@ -31,7 +31,8 @@ export class UsersService {
 
   async generateKeyPairForUser(id: number) {
     const keyPair = await this.encryptService.generateKeyPair();
-    return await this.userRepository.setKeyPairForUser(id, keyPair);
+    await this.userRepository.setKeyPairForUser(id, keyPair);
+    return keyPair;
   }
 
   async getAll() {
