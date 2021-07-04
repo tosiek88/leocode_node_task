@@ -1,5 +1,5 @@
 <p align="center">
-Leocode Node Task
+# Leocode Node Task
 </p>
 
 ## Description
@@ -22,7 +22,7 @@ to make make request against API.
 
 <p>Main core of Authentication module is Passport and JWT, Local Strategy, JWT token will expire after 5 minutes.</p>
 
-<p>    Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
+<p>    Additionally in ```/src/users/users.controller.ts``` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
 
 <p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially. On the end all parts are merged and encoded with base64 schema. Decryption is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
     
