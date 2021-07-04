@@ -33,6 +33,8 @@ Content-Type: application/json
  "password":"$2b$10$NVZuUn6qxpPtmHkLDHxQzetkKgT4Oopi87KOQJcZFFrOm0LdYtWae"
 }
 
+
+
 ###Example postive logine as USER
 POST http://localhost:3000/api/sign-in
 Content-Type: application/json
@@ -42,18 +44,34 @@ Content-Type: application/json
  "password":"$2b$10$bZojqhcDXWZIcfmRD6d9S.mG3hr5oxpM25BTXg35fXJX422NBhnn."
 }
 
-
 ###Example postive logine as USER
 POST http://localhost:3000/api/get-all
 
 {}
 
 ###============================= GENERATE KEY PAIR ENDPOINTS =============================
-:token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNjI1MzQ3MzczLCJleHAiOjE2MjUzNDc2NzN9.LG1ohCYxYmkE792bCe3_dDGbhRTP3PI01ONMFY_P_E
+:user_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJpYXQiOjE2MjUzODk0NDEsImV4cCI6MTYyNTM4OTc0MX0.CaKTx0omN8efzlCVkdMYi5ky8z1xod-J3dqph5ed-_A
+:admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNjI1Mzg5NDgxLCJleHAiOjE2MjUzODk3ODF9.X4Y_jYH6LRlbGwfDLv1bm9PrC9h-d51RzafXwJh3cJM
 ###Example of generate key pair request
 
 POST http://localhost:3000/api/generate-key-pair
-Authorization: Bearer :token
+Authorization: Bearer :admin_token
+
+###
+GET http://localhost:3000/api/admin-endpoint
+Authorization: Bearer :admin_token
+
+### This should fail due token is for user
+GET http://localhost:3000/api/admin-endpoint
+Authorization: Bearer :user_token
+
+### Both tokens should works
+GET http://localhost:3000/api/user-endpoint
+Authorization: Bearer :admin_token
+
+###
+GET http://localhost:3000/api/user-endpoint
+Authorization: Bearer :user_token
 
 
 ###============================= ENCRYPT ENDPOINTS =============================
