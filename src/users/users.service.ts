@@ -36,6 +36,7 @@ export class UsersService {
   }
 
   async getAll() {
-    return await this.userRepository.getAll();
+    const users = await this.userRepository.getAll();
+    return users.map((user) => this.mapper.map(user, UserDto, User));
   }
 }
