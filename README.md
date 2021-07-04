@@ -20,7 +20,7 @@ to make make request against API.
     
 <p>All Modules use Dependency Injections, and built in IoC allowing to decouple components between each other, simplifies writing a test. </p>
 
-<p>Main core of Authentication module is Passport and JWT, Local Strategy, JWT toke will expire after 5 minutes.</p>
+<p>Main core of Authentication module is Passport and JWT, Local Strategy, JWT token will expire after 5 minutes.</p>
 
 <p>    Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
 
