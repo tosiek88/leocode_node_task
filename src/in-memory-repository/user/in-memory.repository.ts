@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ADMIN, USER } from 'src/entity/constans';
-import { User } from 'src/entity/user';
-import { IKeyPair } from 'src/users/users.service';
+import { User } from '../../entity/user';
+import { MockPrivateKey, MockPublicKey } from '../../users/mocks/keys';
+import { IKeyPair } from '../../users/users.service';
 
 @Injectable()
 export class InMemoryUserRepository {
@@ -12,7 +12,7 @@ export class InMemoryUserRepository {
       password: '$2b$10$NVZuUn6qxpPtmHkLDHxQzetkKgT4Oopi87KOQJcZFFrOm0LdYtWae', //encrypted and salted password 1234
       role: 'ADMIN',
       token: '',
-      keyPair: { privateKey: '', publicKey: '' },
+      keyPair: { privateKey: MockPrivateKey, publicKey: MockPublicKey },
     },
     {
       id: 2,
@@ -50,6 +50,19 @@ export class InMemoryUserRepository {
 
   async getAll(): Promise<User[]> {
     return this.users;
+  }
+
+  async getKeysForUser(id: number): Promise<IKeyPair> {
+    const { index } = await this.findOneById(id);
+    const { publicKey, privateKey } = this.users[index].keyPair;
+    if (!publicKey || publicKey === '') {
+      throw new NotFoundException(null, `publicKey not exist for User ${id}`);
+    }
+
+    if (!privateKey || privateKey === '') {
+      throw new NotFoundException(null, `privateKey not exist for User ${id}`);
+    }
+    return { privateKey, publicKey };
   }
 
   async setTokenForUser(email: string, token: string) {
