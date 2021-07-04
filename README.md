@@ -2,10 +2,6 @@
 Leocode Node Task
 </p>
 
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-</p>
 ## Description
 
 Core of application are tree endpoints 
@@ -20,14 +16,15 @@ File `leocode-node-task/src/request.http` contain useful examples of REST Reques
 I am using `https://github.com/pashky/restclient.el` <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
 to make make request against API.
 
-    Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data. 
-    All Modules use Dependency Injections, and built in IoC allowing to decouple components between each other, simplifies writing a test. 
+<p>Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data.</p> 
+    
+<p>All Modules use Dependency Injections, and built in IoC allowing to decouple components between each other, simplifies writing a test. </p>
 
-    Main core of Authentication module is Passport and JWT, Local Strategy, JWT toke will expire after 5 minutes.
+<p>Main core of Authentication module is Passport and JWT, Local Strategy, JWT toke will expire after 5 minutes.</p>
 
-    Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. 
+<p>    Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
 
-    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially, on the end all parts are merged and encoded with base64 schema. Decrypt is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. 
+<p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially, on the end all parts are merged and encoded with base64 schema. Decrypt is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
     
 E2e written in JestJs
 
