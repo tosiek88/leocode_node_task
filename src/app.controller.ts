@@ -1,4 +1,11 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpService,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
 import { CredentialsDto } from './credentials.dto';
@@ -10,6 +17,7 @@ export class AppController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UsersService,
+    private readonly httpService: HttpService,
   ) {}
 
   @UseGuards(AuthGuard('local'))
@@ -18,15 +26,34 @@ export class AppController {
     return this.authService.signIn(credentials);
   }
 
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Post('generate-key-pair')
   async generateKeyPair(@Req() { user }: { user: UserDto }) {
     return this.userService.generateKeyPairForUser(user.id);
   }
 
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Post('encrypt')
   async encrypt(@Req() { user }: { user: UserDto }) {
-    return '';
+    const result = await this.httpService
+      .get('http://www.africau.edu/images/default/sample.pdf', {
+        responseType: 'blob',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/pdf',
+        },
+      })
+      .toPromise();
+
+    return this.userService.encrypt(user.id, result.data);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('decrypt')
+  async decrypt(
+    @Req() { user }: { user: UserDto },
+    @Body() data: { encrypted: string },
+  ) {
+    return this.userService.decrypt(user.id, data.encrypted);
   }
 }
