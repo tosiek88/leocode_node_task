@@ -21,7 +21,7 @@ export class EncryptService {
         type: 'pkcs8',
         format: 'pem',
         cipher: 'aes-256-cbc',
-        passphrase: '',
+        passphrase: process.env.PASSPHRASE,
       },
     });
     return { privateKey, publicKey };
@@ -56,7 +56,7 @@ export class EncryptService {
         const result = privateDecrypt(
           {
             key: privateKey,
-            passphrase: '',
+            passphrase: process.env.PASSPHRASE,
             padding: constants.RSA_PKCS1_PADDING,
           },
           chunk,

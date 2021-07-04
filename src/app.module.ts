@@ -11,7 +11,9 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     EncryptModule,
     HttpModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [],
