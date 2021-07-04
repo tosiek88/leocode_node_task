@@ -1,3 +1,4 @@
+import { IKeyPair } from 'src/users/users.service';
 import { GUEST, UserRole } from './constans';
 
 export const NullUser = {
@@ -6,6 +7,7 @@ export const NullUser = {
   password: '',
   role: GUEST as UserRole,
   token: '',
+  keyPair: { privateKey: '', publicKey: '' } as IKeyPair,
 };
 
 export class User {
@@ -14,4 +16,5 @@ export class User {
   password: string = NullUser.password;
   role: UserRole = NullUser.role;
   token: string = NullUser.token;
+  keyPair: IKeyPair = NullUser.keyPair;
 }

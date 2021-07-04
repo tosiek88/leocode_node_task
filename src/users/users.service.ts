@@ -5,6 +5,11 @@ import { User } from 'src/entity/user';
 import { InMemoryUserRepository } from 'src/in-memory-repository/user/in-memory.repository';
 import { UserDto } from './user.dto';
 
+export interface IKeyPair {
+  privateKey: string;
+  publicKey: string;
+}
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -13,13 +18,17 @@ export class UsersService {
   ) {}
 
   async findByEmail(email: string): Promise<UserDto> {
-    const user = await this.userRepository.findOneByEmail(email);
+    const { user } = await this.userRepository.findOneByEmail(email);
     const mappedUser = this.mapper.map(user, UserDto, User);
     return mappedUser;
   }
 
   async setTokenForUser(email: string, token: string) {
     return await this.userRepository.setTokenForUser(email, token);
+  }
+
+  async setKeyPairForUser(id: number, keyPair: IKeyPair) {
+    return await this.userRepository.setKeyPairForUser(id, keyPair);
   }
 
   async getAll() {
