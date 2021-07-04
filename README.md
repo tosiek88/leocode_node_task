@@ -44,7 +44,8 @@ to make make request against API.
       keyPair: { privateKey: '', publicKey: '' },
     },
 
-``` </p>
+` 
+</p>
 
 <p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially. On the end all parts are merged and encoded with base64 schema. Decryption is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
     
