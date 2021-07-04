@@ -44,8 +44,8 @@ export class AppController {
         },
       })
       .toPromise();
-
-    return this.userService.encrypt(user.id, result.data);
+    const encrypted = await this.userService.encrypt(user.id, result.data);
+    return { encrypted };
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -54,6 +54,7 @@ export class AppController {
     @Req() { user }: { user: UserDto },
     @Body() data: { encrypted: string },
   ) {
-    return this.userService.decrypt(user.id, data.encrypted);
+    const decrypted = await this.userService.decrypt(user.id, data.encrypted);
+    return { decrypted };
   }
 }
