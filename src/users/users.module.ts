@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { InMemoryUserRepository } from 'src/in-memory-repository/user/in-memory.repository';
-import { UsersService } from './users.service';
 import { classes } from '@automapper/classes';
 import { AutomapperModule } from '@automapper/nestjs';
-import { UsersController } from './users.controller';
+import { Module } from '@nestjs/common';
+import { EncryptModule } from '../encrypt/encrypt.module';
+import { InMemoryUserRepository } from '../in-memory-repository/user/in-memory.repository';
 import { UserProfile } from './profiles/user.profile';
-import { EncryptModule } from 'src/encrypt/encrypt.module';
+import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 
 @Module({
   imports: [
