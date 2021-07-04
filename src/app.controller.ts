@@ -1,11 +1,7 @@
-import { Get } from '@nestjs/common';
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
-import { Roles } from './auth/decorators/roles.decorator';
-import { RolesGuard } from './auth/guards/roles.guard';
 import { CredentialsDto } from './credentials.dto';
-import { ADMIN, USER } from './entity/constans';
 import { UserDto } from './users/user.dto';
 import { UsersService } from './users/users.service';
 
@@ -22,28 +18,15 @@ export class AppController {
     return this.authService.signIn(credentials);
   }
 
-  @Post('get-all')
-  async getAll() {
-    return this.userService.getAll();
-  }
-
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('generate-key-pair')
   async generateKeyPair(@Req() { user }: { user: UserDto }) {
-    return this.userService.generateKeyPairForUser(1);
+    return this.userService.generateKeyPairForUser(user.id);
   }
 
-  @Roles(ADMIN)
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Get('admin-endpoint')
-  async onlyAdmin() {
-    return 'Only ADMIN can access this endpoint';
-  }
-
-  @Roles(ADMIN, USER)
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Get('user-endpoint')
-  async onlyAdminAndUser() {
-    return 'Only USER, ADMIN can access this endpoint';
+  // @UseGuards(AuthGuard('jwt'))
+  @Post('encrypt')
+  async encrypt(@Req() { user }: { user: UserDto }) {
+    return '';
   }
 }
