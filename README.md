@@ -13,7 +13,7 @@ Application currently has two users. Additionally Basic Roles policy have been i
 - `/api/encrypt` - Allow authorized user to encrypt filre requested from  <a href="http://www.africau.edu/images/default/sample.pdf" target="_blank">sample.pdf page</a>
 
 File `leocode-node-task/src/request.http` contain useful examples of REST Request.
-I am using `https://github.com/pashky/restclient.el` <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
+I am using <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
 to make make request against API.
 
 <p>Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data.</p> 
@@ -24,7 +24,7 @@ to make make request against API.
 
 <p>    Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
 
-<p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially, on the end all parts are merged and encoded with base64 schema. Decrypt is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
+<p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially. On the end all parts are merged and encoded with base64 schema. Decryption is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
     
 E2e written in JestJs
 
