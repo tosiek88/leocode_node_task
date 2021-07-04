@@ -1,6 +1,5 @@
 import { AutoMap } from '@automapper/classes';
 import { UserRole } from 'src/entity/constans';
-import { IKeyPair } from './users.service';
 
 export class UserDto {
   @AutoMap()
@@ -17,7 +16,4 @@ export class UserDto {
 
   @AutoMap()
   token = '';
-
-  @AutoMap()
-  keyPair: IKeyPair;
 }
