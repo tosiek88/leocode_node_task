@@ -3,22 +3,34 @@ import * as request from 'supertest';
 import { AuthModule } from '../src/auth/auth.module';
 import { UsersModule } from '../src/users/users.module';
 import { EncryptModule } from '../src/encrypt/encrypt.module';
-import { HttpModule, INestApplication } from '@nestjs/common';
+import { HttpModule, HttpService, INestApplication } from '@nestjs/common';
 import { AppController } from '../src/app.controller';
 import { IKeyPair } from 'src/users/users.service';
+import { ConfigModule } from '@nestjs/config';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let token: string;
-  let privateKey, publicKey: string;
+  let privateKey: string;
+  let publicKey: string;
+  let httpService: HttpService;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AuthModule, UsersModule, EncryptModule, HttpModule],
+      imports: [
+        AuthModule,
+        UsersModule,
+        EncryptModule,
+        HttpModule,
+        ConfigModule.forRoot({
+          isGlobal: true,
+        }),
+      ],
       controllers: [AppController],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    httpService = moduleFixture.get(HttpService);
     await app.init();
   });
   describe('/api/sign-in (POST)', () => {
@@ -81,13 +93,25 @@ describe('AppController (e2e)', () => {
       expect(encryptResult.body).toHaveProperty('encrypted');
       expect(encryptResult.body.encrypted).not.toBe('');
 
+      const result = await httpService
+        .get('http://www.africau.edu/images/default/sample.pdf', {
+          responseType: 'blob',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/pdf',
+          },
+        })
+        .toPromise();
+
       const decryptResult = await request(app.getHttpServer())
         .post('/api/decrypt')
         .set('Authorization', `Bearer ${token}`)
         .send({ encrypted: encryptResult.body.encrypted });
 
       expect(decryptResult.statusCode).toBe(201);
-      console.debug(decryptResult.body);
+      expect(decryptResult.body.decrypted.replace(/\s/g, '')).toStrictEqual(
+        result.data.replace(/\s/g, ''),
+      );
     }, 10000);
   });
 });
