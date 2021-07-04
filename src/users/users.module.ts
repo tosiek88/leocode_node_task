@@ -3,8 +3,9 @@ import { InMemoryUserRepository } from 'src/in-memory-repository/user/in-memory.
 import { UsersService } from './users.service';
 import { classes } from '@automapper/classes';
 import { AutomapperModule } from '@automapper/nestjs';
-import { UserProfile } from 'src/profiles/user.profile';
 import { UsersController } from './users.controller';
+import { UserProfile } from './profiles/user.profile';
+import { EncryptModule } from 'src/encrypt/encrypt.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UsersController } from './users.controller';
       options: [{ name: 'user', pluginInitializer: classes }],
       singular: true,
     }),
+    EncryptModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, InMemoryUserRepository, UserProfile],
