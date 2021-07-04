@@ -29,6 +29,7 @@ to make make request against API.
 E2e written in JestJs
 
 Example of use: 
+![Demo Animation](./assets/example.gif?raw=true)
 
 ## Installation
 
