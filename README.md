@@ -16,7 +16,9 @@ File `leocode-node-task/src/request.http` contain useful examples of REST Reques
 I am using <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
 to make make request against API.
 
-<p>Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data.</p> 
+<p>Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data.
+One Profile for Automapper configuration have implemented for User<->UserDTO mapping.
+</p> 
     
 <p>All Modules use Dependency Injections, and built in IoC allowing to decouple components between each other, simplifies writing a test. </p>
 
