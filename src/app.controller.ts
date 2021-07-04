@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
-import { CredentialsDto } from './credentials.dto';
+import { CredentialsDto } from './auth/dto/credentials.dto';
 import { UserDto } from './users/user.dto';
 import { UsersService } from './users/users.service';
 
