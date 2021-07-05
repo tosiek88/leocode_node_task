@@ -5,8 +5,8 @@
 ## Description
 
 Core of application are tree endpoints 
-- `/api/sign-in` - Allow user to retrive a Bearer Token, necessary to future authorization.
-Application currently has two users. Additionally Basic Roles policy have been implemented, One user is ADMIN, another just an User.
+- `/api/sign-in` - Allow user to generated Bearer Token which is valid for 5 minutes, necessary to future authentication.
+Application currently has two users - ADMIN and USER.
 
 - `/api/generate-key-pair` - Allow authorized user to generate Private Encrypted RSA-2048 and Public Key, both are returned as a json object with appropriate field names. Generated keys are stored together with User data in Mocked Database
 
@@ -16,15 +16,15 @@ File `leocode-node-task/src/request.http` contain useful examples of REST Reques
 I am using <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
 to make make request against API.
 
-<p>Application is divided on modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. Between component's DTO's are used to transfer only reqired data.
-One Profile for Automapper configuration have implemented for User<->UserDTO mapping.
+<p>Application is divided by modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. DTO's are used to transfer only reqired data, between components and layers. 
+Currently Automapper has one mapping profile for User<->UserDTO.
 </p> 
     
-<p>All Modules use Dependency Injections, and built in IoC allowing to decouple components between each other, simplifies writing a test. </p>
+<p>All Modules use built-in NestJS Dependency Injections and IoC allowing to decouple components between each other, simplifies writing a test. </p>
 
-<p>Main core of Authentication module is Passport and JWT, Local Strategy, JWT token will expire after 5 minutes.</p>
+<p>Main core of Authentication module is Passport and JWT, Local Strategy. each token is valid for 5 minutes</p>
 
-<p>Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are meet it will attach user object to request object, which can be access in controller. </p>
+<p>Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are met it will attach user to request object, which can be access in controller. </p>
 
 <p> In memory database contain two users:
 
@@ -49,9 +49,9 @@ One Profile for Automapper configuration have implemented for User<->UserDTO map
 ``` 
 </p>
 
-<p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided for segments and encrypted partially. On the end all parts are merged and encoded with base64 schema. Decryption is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
+<p>    Built-in Node CryptoJs is responsible for encryption and decryption. With modulusLength  set to 2048 buffer of data need to be divided by segments and encrypted partially. On the end all parts are merged and encoded with base64 schema. Decryption is working exacly same but with oposite direction. Public key is used for encryption, and is taken from stored User object (from mocked Database), only authorized user can get a key. </p>
     
-E2e written in JestJs
+E2e test are written in JestJs
 
 Example of use: 
 ![Demo Animation](./assets/example.gif?raw=true)
