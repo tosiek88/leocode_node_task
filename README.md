@@ -16,7 +16,7 @@ File `leocode-node-task/src/request.http` contain useful examples of REST Reques
 I am using <a href="https://github.com/pashky/restclient.el" target="_blank">https://github.com/pashky/restclient.el</a>
 to make make request against API.
 
-<p>Application is divided by modules which encapsulated their responsibilities, Very Basic implementation off Domain Driven Desing is used, Flow of data is from Controller through the Servies to Repository. DTO's are used to transfer only reqired data, between components and layers. 
+<p>In application I was trying to follow DDD/Onion Architecutre approach - app divided by modules which encapsulated their responsibilities. Flow of data is from Controller through the Services to Repository. DTO's are used to transfer only reqired data, between components and layers. 
 Currently Automapper has one mapping profile for User<->UserDTO.
 </p> 
     
@@ -26,7 +26,7 @@ Currently Automapper has one mapping profile for User<->UserDTO.
 
 <p>Additionally in `/src/users/users.controller.ts` there is couple of examples that allow to test functionality of Role, RoleGuards. AuthGuards are elegant way to manage all authentication logic, if all conditions are met it will attach user to request object, which can be access in controller. </p>
 
-<p> In memory database contain two users:
+<p> In memory database contain two users, each has hashed and salted password. Auth Service is responsible to compare that password sent as credentials in request match with this in Database. (Auth Service use bcrypt)
 
 ```ts 
     {
